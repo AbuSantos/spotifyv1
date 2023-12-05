@@ -25,7 +25,7 @@ async function refreshAccessToken(token) {
   }
 }
 
-export default NextAuth({
+export const options = {
   // Configure one or more authentication providers
   providers: [
     SpotifyProvider({
@@ -62,13 +62,13 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      console.log("Session Callback - Session:", session);
-      console.log("Session Callback - Token:", token);
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.user.username = token.username;
+      if (session?.user) {
+        session.user.accessToken = token.accessToken;
+        session.user.refreshToken = token.refreshToken;
+        session.user.username = token.username;
+      }
 
       return session;
     },
   },
-});
+};

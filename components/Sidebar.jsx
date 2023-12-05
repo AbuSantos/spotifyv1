@@ -1,4 +1,4 @@
-import Link from 'next/link'
+'use client'
 import {
   HomeIcon,
   SearchIcon,
@@ -6,11 +6,23 @@ import {
   PlusCircleIcon,
   RssIcon,
   HeartIcon,
+  LogoutIcon,
 } from '@heroicons/react/outline'
+import { signOut, useSession } from 'next-auth/react'
+
 const Sidebar = () => {
+  const { data: session, status } = useSession()
+  console.log(session)
   return (
-    <div className=" p-4 text-gray-500 border-r border-gray-900 text-sm ">
+    <div className=" p-4 text-gray-500 border-r border-gray-900 text-sm scrollbar-hide  overflow-y-scroll h-screen ">
       <div className=" space-y-4">
+        <button
+          onClick={() => signOut()}
+          className="flex items-center space-x-2  hover:text-white"
+        >
+          <LogoutIcon className="h-5" />
+          <p>Logout</p>
+        </button>
         <button className="flex items-center space-x-2  hover:text-white">
           <HomeIcon className="h-5" />
           <p>Home</p>

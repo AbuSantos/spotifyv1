@@ -46,7 +46,7 @@ export const options = {
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           accessTokenExpires: account.expires_at * 1000, //we're handling expiring times in milliseconds
-          user,
+          username: account.providerAccountId,
         };
       }
 
@@ -62,11 +62,9 @@ export const options = {
     },
 
     async session({ session, token }) {
-      if (session?.user) {
-        session.user.accessToken = token.accessToken;
-        session.user.refreshToken = token.refreshToken;
-        session.user.username = token.username;
-      }
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.user.username = token.username;
 
       return session;
     },

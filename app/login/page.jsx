@@ -3,8 +3,6 @@ import { getProviders, signIn } from 'next-auth/react'
 const Login = async () => {
   const providers = await getProviders()
 
-  console.log('Rendered with providers:', providers)
-
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">
       <img

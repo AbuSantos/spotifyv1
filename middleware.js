@@ -16,8 +16,8 @@ export async function middleware(req) {
 
   if (!token && pathname !== "/login") {
     // And redirect to the new URL
-    url.pathname = "/login";
     const url = req.nextUrl.clone();
+    url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 }
